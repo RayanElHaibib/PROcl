@@ -169,7 +169,7 @@ export default async (client: CustomClient) => {
   /**
    *
    *
-   * هنا يتم إستدعاء ملفات الداشبورد
+   * Interface Web + API Backend sur le port 3000
    *
    *
    */
@@ -194,13 +194,28 @@ export default async (client: CustomClient) => {
   // Error handling middleware
   app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     console.error(err.stack);
-    res.status(500).sendFile(path.join(out, "404.html"));
+    res.status(500).json({ error: "Internal Server Error" });
   });
 
   app.listen(port, () => {
     console.log(
       chalk.yellowBright.bgRed(
-        `☭ DashBoard running on http://localhost:${port}`
+        `🌐 ProClone Web Interface + Bot API running on http://localhost:${port}`
+      )
+    );
+    console.log(
+      chalk.cyan(
+        `📱 Pages Serveur: http://localhost:${port}/server/[ID]/utility`
+      )
+    );
+    console.log(
+      chalk.green(
+        `🤖 API Backend: http://localhost:${port}/backend/status`
+      )
+    );
+    console.log(
+      chalk.yellow(
+        `🎯 Tout fonctionne sur le port ${port} !`
       )
     );
   });
